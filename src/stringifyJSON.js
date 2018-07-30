@@ -6,10 +6,7 @@
 var stringifyJSON = function(obj) {
   if (typeof obj === "number") {
     return obj + "";
-  } 
-
-
-else if (obj === null) {
+  } else if (obj === null) {
     return "null";
   } else if (typeof obj === "boolean") {
     return obj + "";
@@ -29,11 +26,12 @@ else if (obj === null) {
   } else if (typeof obj === "object") {
     var objStr = "";
     for (var key in obj) {
-console.log("this is real json: " + JSON.stringify("hi"));
-      if(objStr) {
-        objStr += ",";
+      if (key !== "functions" && key !== "undefined") {
+        if (objStr) {
+          objStr += ",";
+        }
+        objStr += ("\"" + key + "\":") + stringifyJSON(obj[key]);
       }
-      objStr += ("\"" + key + "\":") + stringifyJSON(obj[key]);
     }
     return "{" + objStr + "}";
   } 
